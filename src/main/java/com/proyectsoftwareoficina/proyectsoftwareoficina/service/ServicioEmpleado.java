@@ -1,10 +1,7 @@
 package com.proyectsoftwareoficina.proyectsoftwareoficina.service;
 
 import com.proyectsoftwareoficina.proyectsoftwareoficina.model.Empleado;
-import com.proyectsoftwareoficina.proyectsoftwareoficina.model.Empresa1;
-import com.proyectsoftwareoficina.proyectsoftwareoficina.model.MovimientoDinero;
 import com.proyectsoftwareoficina.proyectsoftwareoficina.repositories.RepositorioEmpleado;
-import com.proyectsoftwareoficina.proyectsoftwareoficina.repositories.RespositorioEmpresa;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
