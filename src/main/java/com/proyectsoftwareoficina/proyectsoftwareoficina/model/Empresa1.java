@@ -31,6 +31,10 @@ public class Empresa1 {
         this.empleado1 = empleado1;
     }
 
+    public void setNit(Integer nit) {
+        this.nit = nit;
+    }
+
     public Integer getNit() {
         return nit;
     }

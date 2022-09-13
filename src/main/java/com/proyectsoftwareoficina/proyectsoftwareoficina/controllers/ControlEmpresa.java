@@ -9,36 +9,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/enterprise")
 public class ControlEmpresa {
-    /*
-    ServicioEmpresa servicioEmpresa1 = new ServicioEmpresa();
-    Empresa1 empresa1;
-
-    public ControlEmpresa(){
-        this.empresa1 = this.servicioEmpresa1.getEmpresa1();
-    }
-
-    @GetMapping("/informacion")
-    public Empresa1 informacion(){
-        return this.empresa1;
-    }*/
-
 
     ServicioEmpresa servicioEmpresa;
     public ControlEmpresa(ServicioEmpresa servicioEmpresa){
         this.servicioEmpresa = servicioEmpresa;
     }
-    @GetMapping("/informacion")
-    public List<Empresa1> informacion(){
-        return this.servicioEmpresa.getRepositorio() ;
+    @GetMapping
+    public ResponseEntity<List<Empresa1>> listar(){
+        List<Empresa1> obj = servicioEmpresa.listar();
+        return new ResponseEntity<List<Empresa1>>(obj, HttpStatus.OK);
     }
 
-    @PostMapping("/informacion")
+
+    @PostMapping
     public  Empresa1 crearEmpresa(@RequestBody Empresa1 empresa){
         return this.servicioEmpresa.crearRegistro(empresa);
 
     }
-    @PutMapping("/informacion")
+    @PutMapping
     public ResponseEntity<Empresa1> actualizar(@RequestBody Empresa1 empresa){
         Empresa1 obj = servicioEmpresa.actualizar(empresa);
         ResponseEntity<Empresa1> empresa1ResponseEntity = new ResponseEntity<>(obj, HttpStatus.OK);
@@ -47,26 +37,24 @@ public class ControlEmpresa {
     }
 
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable("id") Integer id) throws Exception{
-        Empresa1 obj = servicioEmpresa.ListarPorId(id);
+    @DeleteMapping("/{nit}")
+    public ResponseEntity<Void> eliminar(@PathVariable("nit") Integer nit) throws Exception{
+        Empresa1 obj = servicioEmpresa.ListarPorId(nit);
         if(obj ==null) {
-            throw new Exception("No se encontro el ID ");
+            throw new Exception("No se encontro el NIT ");
         }
-        servicioEmpresa.eliminar(id);
-        ResponseEntity<Void> voidResponseEntity = new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        return voidResponseEntity;
+        servicioEmpresa.eliminar(nit);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Empresa1> ListarPorId(@PathVariable("id")Integer codigo)throws Exception{
+    @GetMapping("/{nit}")
+    public ResponseEntity<Empresa1> ListarPorId(@PathVariable("nit") Integer codigo)throws Exception{
         Empresa1 obj = servicioEmpresa.ListarPorId(codigo);
         if(obj == null) {
             throw new Exception("No se encontro el Pais ");
         }
-
-        ResponseEntity<Empresa1> empresa1ResponseEntity = new ResponseEntity<>(obj, HttpStatus.OK);
-        return empresa1ResponseEntity;
+        return new ResponseEntity<Empresa1>(obj, HttpStatus.OK);
 
     }
 
