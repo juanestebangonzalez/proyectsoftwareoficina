@@ -1,5 +1,6 @@
 package com.proyectsoftwareoficina.proyectsoftwareoficina.controllers;
 
+import com.proyectsoftwareoficina.proyectsoftwareoficina.model.Empleado;
 import com.proyectsoftwareoficina.proyectsoftwareoficina.model.Empresa1;
 import com.proyectsoftwareoficina.proyectsoftwareoficina.service.ServicioEmpleado;
 import com.proyectsoftwareoficina.proyectsoftwareoficina.service.ServicioEmpresa;
@@ -16,29 +17,29 @@ public class ControlEmpleado {
     ServicioEmpleado servicioEmpleado;
 
     @GetMapping
-    public ResponseEntity<List<Empresa1>> listar(){
-        List<Empresa1> obj = servicioEmpleado.listar();
-        return new ResponseEntity<List<Empresa1>>(obj, HttpStatus.OK);
+    public ResponseEntity<List<Empleado>> listar(){
+        List<Empleado> obj = servicioEmpleado.listar();
+        return new ResponseEntity<List<Empleado>>(obj, HttpStatus.OK);
     }
 
 
     @PostMapping
-    public  Empresa1 crearEmpresa(@RequestBody Empresa1 empresa){
-        return this.servicioEmpleado.crearRegistro(empresa);
+    public  Empleado crearEmpresa(@RequestBody Empleado empleado){
+        return this.servicioEmpleado.crearRegistro(empleado);
 
     }
     @PutMapping
-    public ResponseEntity<Empresa1> actualizar(@RequestBody Empresa1 empresa){
-        Empresa1 obj = servicioEmpleado.actualizar(empresa);
-        ResponseEntity<Empresa1> empresa1ResponseEntity = new ResponseEntity<>(obj, HttpStatus.OK);
-        return empresa1ResponseEntity;
+    public ResponseEntity<Empleado> actualizar(@RequestBody Empleado empleado){
+        Empleado obj = servicioEmpleado.actualizar(empleado);
+        ResponseEntity<Empleado> empleadosponseEntity = new ResponseEntity<>(obj, HttpStatus.OK);
+        return empleadosponseEntity;
 
     }
 
 
     @DeleteMapping("/{nit}")
     public ResponseEntity<Void> eliminar(@PathVariable("nit") Integer nit) throws Exception{
-        Empresa1 obj = servicioEmpleado.ListarPorId(nit);
+        Empleado obj = servicioEmpleado.ListarPorId(nit);
         if(obj ==null) {
             throw new Exception("No se encontro el NIT ");
         }
@@ -48,12 +49,12 @@ public class ControlEmpleado {
     }
 
     @GetMapping("/{nit}")
-    public ResponseEntity<Empresa1> ListarPorId(@PathVariable("nit") Integer codigo)throws Exception{
-        Empresa1 obj = servicioEmpleado.ListarPorId(codigo);
+    public ResponseEntity<Empleado> ListarPorId(@PathVariable("nit") Integer codigo)throws Exception{
+        Empleado obj = servicioEmpleado.ListarPorId(codigo);
         if(obj == null) {
             throw new Exception("No se encontro el Pais ");
         }
-        return new ResponseEntity<Empresa1>(obj, HttpStatus.OK);
+        return new ResponseEntity<Empleado>(obj, HttpStatus.OK);
 
     }
 }
