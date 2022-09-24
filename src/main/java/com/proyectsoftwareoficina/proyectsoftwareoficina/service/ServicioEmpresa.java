@@ -1,6 +1,8 @@
 package com.proyectsoftwareoficina.proyectsoftwareoficina.service;
 
+import com.proyectsoftwareoficina.proyectsoftwareoficina.controllers.ControlMovimientoDinero;
 import com.proyectsoftwareoficina.proyectsoftwareoficina.model.Empresa1;
+import com.proyectsoftwareoficina.proyectsoftwareoficina.model.MovimientoDinero;
 import com.proyectsoftwareoficina.proyectsoftwareoficina.repositories.RespositorioEmpresa;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ public class ServicioEmpresa {
         this.repositorio = repositorio;
 
     }
+
     public List<Empresa1> listar(){
         return this.repositorio.findAll();
     }

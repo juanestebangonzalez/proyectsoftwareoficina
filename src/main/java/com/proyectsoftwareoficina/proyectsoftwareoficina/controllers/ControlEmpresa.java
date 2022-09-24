@@ -1,10 +1,14 @@
 package com.proyectsoftwareoficina.proyectsoftwareoficina.controllers;
 
+
 import com.proyectsoftwareoficina.proyectsoftwareoficina.model.Empresa1;
 import com.proyectsoftwareoficina.proyectsoftwareoficina.service.ServicioEmpresa;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.proyectsoftwareoficina.proyectsoftwareoficina.model.MovimientoDinero;
+
 
 import java.util.List;
 
@@ -12,6 +16,7 @@ import java.util.List;
 @RequestMapping("/enterprise")
 public class ControlEmpresa {
 
+    @Autowired
     ServicioEmpresa servicioEmpresa;
     public ControlEmpresa(ServicioEmpresa servicioEmpresa){
         this.servicioEmpresa = servicioEmpresa;
@@ -28,15 +33,13 @@ public class ControlEmpresa {
         return this.servicioEmpresa.crearRegistro(empresa);
 
     }
-    @PutMapping
+    @PatchMapping
     public ResponseEntity<Empresa1> actualizar(@RequestBody Empresa1 empresa){
         Empresa1 obj = servicioEmpresa.actualizar(empresa);
         ResponseEntity<Empresa1> empresa1ResponseEntity = new ResponseEntity<>(obj, HttpStatus.OK);
         return empresa1ResponseEntity;
 
     }
-
-
     @DeleteMapping("/{nit}")
     public ResponseEntity<Void> eliminar(@PathVariable("nit") Integer nit) throws Exception{
         Empresa1 obj = servicioEmpresa.ListarPorId(nit);
@@ -57,6 +60,12 @@ public class ControlEmpresa {
         return new ResponseEntity<Empresa1>(obj, HttpStatus.OK);
 
     }
+    /*
+    @GetMapping ("/EmpresaMovimiento/{nit}")
+    public List<MovimientoDinero> buscarMovimiento (@PathVariable ("nit") Integer nit) {
+      return ServicioEmpresa.buscarMovimiento(nit);
+    }
 
+     */
 
 }
